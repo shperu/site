@@ -1,10 +1,147 @@
 <!DOCTYPE html>
-<html>
+<html lang="es">
 <head>
-    <title>Mi Página en GitHub</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Invitación de Cumpleaños - Among Us</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+    <style>
+        body {
+            background-color: #1e1e2f;
+            color: white;
+            font-family: 'Press Start 2P', cursive;
+            text-align: center;
+        }
+        .container {
+            margin-top: 50px;
+        }
+        .among-us-theme {
+            background-color: #2d2d44;
+            padding: 20px;
+            border-radius: 10px;
+            border: 5px solid #ff4754;
+        }
+        h1 {
+            color: #ff4754;
+            font-size: 3rem;
+        }
+        h2 {
+            color: #4bffa5;
+            font-size: 2rem;
+        }
+        p {
+            font-size: 1.2rem;
+        }
+        .btn-primary {
+            background-color: #ff4754;
+            border-color: #ff4754;
+            font-size: 1.2rem;
+            padding: 10px 20px;
+        }
+        .btn-primary:hover {
+            background-color: #ff6b6b;
+            border-color: #ff6b6b;
+        }
+        .astronaut-img {
+            width: 150px;
+            margin: 20px;
+        }
+        .cumpleanos-numero {
+            font-size: 10rem;
+            color: #ff4754;
+            margin: 20px 0;
+        }
+        .foto-nino {
+            width: 200px;
+            border-radius: 50%;
+            border: 5px solid #4bffa5;
+            margin: 20px 0;
+        }
+        .form-control {
+            font-family: 'Press Start 2P', cursive;
+            margin: 10px 0;
+        }
+    </style>
 </head>
 <body>
-    <h1>¡Hola, mundo!</h1>
-    <p>Esta es mi página en GitHub.</p>
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-8 among-us-theme">
+                <h1>¡Invitación de Cumpleaños!</h1>
+                <h2>Mateo Vicente</h2>
+                <p>¡Estás invitado a celebrar mi cumpleaños número:</p>
+                <div class="cumpleanos-numero">5</div>
+
+                <!-- Imágenes de astronautas y foto del niño -->
+                <div class="d-flex justify-content-center align-items-center">
+                    <img src="1astronauta.png" alt="Astronauta 1" class="astronaut-img">
+                    <img src="5082703962565620062.jpg" alt="Foto del niño" class="foto-nino">
+                    <img src="2astronauta.png" alt="Astronauta 2" class="astronaut-img">
+                </div>
+
+                <p><strong>Temática:</strong> Among Us</p>
+                <p><strong>Fecha:</strong> 30 de abril</p>
+                <p><strong>Lugar:</strong> Colegio Mi Dulce Amanecer</p>
+
+                <!-- Formulario para ingresar el nombre -->
+                <form id="invitacionForm">
+                    <div class="form-group">
+                        <label for="nombre">Nombre:</label>
+                        <input type="text" class="form-control" id="nombre" placeholder="Ingresa tu nombre" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Aceptar Invitación</button>
+                </form>
+
+                <p>¡No faltes! Habrá juegos, sorpresas y mucha diversión.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Sonido de fondo -->
+    <audio autoplay loop>
+        <source src="Among Us.mp3" type="audio/wav">
+        Tu navegador no soporta el elemento de audio.
+    </audio>
+
+    <!-- Bootstrap JS and dependencies -->
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"></script>
+
+    <!-- Script para enviar datos a Google Sheets -->
+    <script>
+        document.getElementById('invitacionForm').addEventListener('submit', function (event) {
+            event.preventDefault(); // Evita que el formulario se envíe de forma tradicional
+
+            const nombre = document.getElementById('nombre').value;
+
+            // URL de la aplicación web de Google Apps Script
+            const scriptURL = 'https://script.google.com/macros/s/AKfycbzsLjxTdKvh1mm0px2aYWknkNZDnfs8G1jCCHeyA8UaSFUE2B-aXBa1r9AD5lRhcSVyiQ/exec'; // Reemplaza con tu URL
+
+            // Enviar datos a Google Sheets
+            fetch(scriptURL, {
+                method: 'POST',
+                body: JSON.stringify({ nombre: nombre }), // Enviar datos como JSON
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    alert('¡Invitación aceptada! Gracias por confirmar.');
+                    document.getElementById('nombre').value = ''; // Borrar el campo de nombre
+                } else {
+                    alert('Hubo un error al enviar los datos. Intenta de nuevo.');
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('Hubo un error al enviar los datos. Intenta de nuevo.');
+            });
+        });
+    </script>
 </body>
 </html>
