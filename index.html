@@ -164,16 +164,12 @@ document.getElementById('invitacionForm').addEventListener('submit', function (e
     body: JSON.stringify({ nombre: nombre }), // Enviar datos como JSON
     headers: {
       'Content-Type': 'application/json'
-    }
+    },
+    mode: 'no-cors' // Evitar problemas de CORS
   })
-  .then(response => response.json())
-  .then(data => {
-    if (data.success) {
-      alert('¡Invitación aceptada! Gracias por confirmar.');
-      document.getElementById('nombre').value = ''; // Borrar el campo de nombre
-    } else {
-      alert('Hubo un error al enviar los datos. Intenta de nuevo.');
-    }
+  .then(() => {
+    alert('¡Invitación aceptada! Gracias por confirmar.');
+    document.getElementById('nombre').value = ''; // Borrar el campo de nombre
   })
   .catch(error => {
     console.error('Error:', error);
