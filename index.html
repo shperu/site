@@ -149,45 +149,37 @@
 
     <!-- Script para enviar datos a Google Sheets -->
     <script>
-        // URL de la aplicación web de Google Apps Script
-        const scriptURL = 'https://script.google.com/macros/s/AKfycbyC7R-DYYKqtvK710oDfLVbjwyCmXWvCmYsFy0jEVyYtAXk0ZotCBGRfPYEn_s8dBEHjA/exec'; // Reemplaza con la URL de tu aplicación web
+// URL de la aplicación web de Google Apps Script
+const scriptURL = 'https://script.google.com/macros/s/AKfycbwaPCksDzE7t8m2EP2_UQ7oCbN6myfjSyEOPFebn_KA/dev'; // Reemplaza con la URL de tu aplicación web
 
-        // Reproducir audio después de que el usuario interactúe con la página
-        document.addEventListener('click', function () {
-            const audio = document.getElementById('backgroundAudio');
-            audio.play().catch(() => {
-                console.log("La reproducción automática fue bloqueada por el navegador.");
-            });
-        });
+// Enviar datos a Google Sheets cuando se envíe el formulario
+document.getElementById('invitacionForm').addEventListener('submit', function (event) {
+  event.preventDefault(); // Evita que el formulario se envíe de forma tradicional
 
-        // Enviar datos a Google Sheets cuando se envíe el formulario
-        document.getElementById('invitacionForm').addEventListener('submit', function (event) {
-            event.preventDefault(); // Evita que el formulario se envíe de forma tradicional
+  const nombre = document.getElementById('nombre').value;
 
-            const nombre = document.getElementById('nombre').value;
-
-            // Enviar datos a Google Sheets
-            fetch(scriptURL, {
-                method: 'POST',
-                body: JSON.stringify({ nombre: nombre }), // Enviar datos como JSON
-                headers: {
-                    'Content-Type': 'application/json'
-                }
-            })
-            .then(response => response.json())
-            .then(data => {
-                if (data.success) {
-                    alert('¡Invitación aceptada! Gracias por confirmar.');
-                    document.getElementById('nombre').value = ''; // Borrar el campo de nombre
-                } else {
-                    alert('Hubo un error al enviar los datos. Intenta de nuevo.');
-                }
-            })
-            .catch(error => {
-                console.error('Error:', error);
-                alert('Hubo un error al enviar los datos. Intenta de nuevo.');
-            });
-        });
+  // Enviar datos a Google Sheets
+  fetch(scriptURL, {
+    method: 'POST',
+    body: JSON.stringify({ nombre: nombre }), // Enviar datos como JSON
+    headers: {
+      'Content-Type': 'application/json'
+    }
+  })
+  .then(response => response.json())
+  .then(data => {
+    if (data.success) {
+      alert('¡Invitación aceptada! Gracias por confirmar.');
+      document.getElementById('nombre').value = ''; // Borrar el campo de nombre
+    } else {
+      alert('Hubo un error al enviar los datos. Intenta de nuevo.');
+    }
+  })
+  .catch(error => {
+    console.error('Error:', error);
+    alert('Hubo un error al enviar los datos. Intenta de nuevo.');
+  });
+});
     </script>
 </body>
 </html>
