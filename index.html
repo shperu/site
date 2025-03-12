@@ -14,64 +14,64 @@
             color: white;
             font-family: 'Press Start 2P', cursive;
             text-align: center;
-            overflow: auto; /* Permite el desplazamiento */
+            overflow: auto;
             position: relative;
-            min-height: 100vh; /* Asegura que el body ocupe al menos toda la pantalla */
+            min-height: 100vh;
         }
         .container {
-            margin-top: 20px; /* Reducido para móviles */
-            margin-bottom: 20px; /* Espacio inferior para evitar cortes */
+            margin-top: 20px;
+            margin-bottom: 20px;
             position: relative;
             z-index: 1;
         }
         .among-us-theme {
             background-color: #2d2d44;
-            padding: 15px; /* Reducido para móviles */
+            padding: 15px;
             border-radius: 10px;
             border: 5px solid #ff4754;
         }
         h1 {
             color: #ff4754;
-            font-size: 2rem; /* Reducido para móviles */
+            font-size: 2rem;
         }
         h2 {
             color: #4bffa5;
-            font-size: 1.5rem; /* Reducido para móviles */
+            font-size: 1.5rem;
         }
         p {
-            font-size: 1rem; /* Reducido para móviles */
+            font-size: 1rem;
         }
         .btn-primary {
             background-color: #ff4754;
             border-color: #ff4754;
-            font-size: 1rem; /* Reducido para móviles */
-            padding: 8px 16px; /* Reducido para móviles */
+            font-size: 1rem;
+            padding: 8px 16px;
         }
         .btn-primary:hover {
             background-color: #ff6b6b;
             border-color: #ff6b6b;
         }
         .astronaut-img {
-            max-width: 80px; /* Reducido para móviles */
+            max-width: 80px;
             height: auto;
-            margin: 10px; /* Reducido para móviles */
+            margin: 10px;
         }
         .cumpleanos-numero {
-            font-size: 5rem; /* Reducido para móviles */
+            font-size: 5rem;
             color: #ff4754;
-            margin: 10px 0; /* Reducido para móviles */
+            margin: 10px 0;
         }
         .foto-nino {
-            max-width: 120px; /* Reducido para móviles */
+            max-width: 120px;
             height: auto;
             border-radius: 50%;
             border: 5px solid #4bffa5;
-            margin: 10px 0; /* Reducido para móviles */
+            margin: 10px 0;
         }
         .form-control {
             font-family: 'Press Start 2P', cursive;
             margin: 10px 0;
-            font-size: 0.9rem; /* Reducido para móviles */
+            font-size: 0.9rem;
         }
 
         /* Animación de planetas cayendo */
@@ -82,8 +82,8 @@
 
         .planet {
             position: absolute;
-            width: 30px; /* Reducido para móviles */
-            height: 30px; /* Reducido para móviles */
+            width: 30px;
+            height: 30px;
             background: url('planeta.png') no-repeat center center/cover;
             animation: fall linear infinite;
         }
@@ -110,10 +110,10 @@
                 <h1>¡Invitación de Cumpleaños!</h1>
                 <h2>Mateo Vicente</h2>
                 <p>¡Estás invitado a celebrar mi cumpleaños número:</p>
-                <div class="cumpleanos-numero">6</div> <!-- Cambiado de 5 a 6 -->
+                <div class="cumpleanos-numero">6</div>
 
                 <!-- Imágenes de astronautas y foto del niño -->
-                <div class="d-flex justify-content-center align-items-center flex-wrap"> <!-- Flex-wrap para ajustar en móviles -->
+                <div class="d-flex justify-content-center align-items-center flex-wrap">
                     <img src="1astronauta.png" alt="Astronauta 1" class="astronaut-img">
                     <img src="5082703962565620062.jpg" alt="Foto del niño" class="foto-nino">
                     <img src="2astronauta.png" alt="Astronauta 2" class="astronaut-img">
@@ -147,8 +147,11 @@
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"></script>
 
-    <!-- Script para reproducir audio después de la interacción del usuario -->
+    <!-- Script para enviar datos a Google Sheets -->
     <script>
+        // URL de la aplicación web de Google Apps Script
+        const scriptURL = 'https://script.google.com/macros/s/AKfycbyC7R-DYYKqtvK710oDfLVbjwyCmXWvCmYsFy0jEVyYtAXk0ZotCBGRfPYEn_s8dBEHjA/exec'; // Reemplaza con la URL de tu aplicación web
+
         // Reproducir audio después de que el usuario interactúe con la página
         document.addEventListener('click', function () {
             const audio = document.getElementById('backgroundAudio');
@@ -157,14 +160,11 @@
             });
         });
 
-        // Script para enviar datos a Google Sheets
+        // Enviar datos a Google Sheets cuando se envíe el formulario
         document.getElementById('invitacionForm').addEventListener('submit', function (event) {
             event.preventDefault(); // Evita que el formulario se envíe de forma tradicional
 
             const nombre = document.getElementById('nombre').value;
-
-            // URL de la aplicación web de Google Apps Script
-            const scriptURL = 'https://script.google.com/macros/s/AKfycbzsLjxTdKvh1mm0px2aYWknkNZDnfs8G1jCCHeyA8UaSFUE2B-aXBa1r9AD5lRhcSVyiQ/exec'; // Reemplaza con tu URL
 
             // Enviar datos a Google Sheets
             fetch(scriptURL, {
