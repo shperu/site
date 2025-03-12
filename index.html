@@ -150,7 +150,7 @@
     <!-- Script para enviar datos a Google Sheets -->
     <script>
         // URL de la aplicación web de Google Apps Script
-        const scriptURL = 'https://script.google.com/macros/s/AKfycbyC7R-DYYKqtvK710oDfLVbjwyCmXWvCmYsFy0jEVyYtAXk0ZotCBGRfPYEn_s8dBEHjA/exec'; // Reemplaza con la URL de tu aplicación web
+        const scriptURL = 'https://script.google.com/macros/s/AKfycbwaPCksDzE7t8m2EP2_UQ7oCbN6myfjSyEOPFebn_KA/dev'; // Reemplaza con la URL de tu aplicación web
 
         // Reproducir audio después de que el usuario interactúe con la página
         document.addEventListener('click', function () {
@@ -172,16 +172,12 @@
                 body: JSON.stringify({ nombre: nombre }), // Enviar datos como JSON
                 headers: {
                     'Content-Type': 'application/json'
-                }
+                },
+                mode: 'no-cors' // Evitar problemas de CORS
             })
-            .then(response => response.json())
-            .then(data => {
-                if (data.success) {
-                    alert('¡Invitación aceptada! Gracias por confirmar.');
-                    document.getElementById('nombre').value = ''; // Borrar el campo de nombre
-                } else {
-                    alert('Hubo un error al enviar los datos. Intenta de nuevo.');
-                }
+            .then(() => {
+                alert('¡Invitación aceptada! Gracias por confirmar.');
+                document.getElementById('nombre').value = ''; // Borrar el campo de nombre
             })
             .catch(error => {
                 console.error('Error:', error);
