@@ -62,11 +62,11 @@
             margin: 10px 0;
         }
         .foto-nino {
-            max-width: 120px;
+            max-width: 200px; /* Aumentamos el tamaño de la foto del niño */
             height: auto;
             border-radius: 50%;
             border: 5px solid #4bffa5;
-            margin: 10px 0;
+            margin: 20px 0; /* Ajustamos el margen */
         }
         .form-control {
             font-family: 'Press Start 2P', cursive;
@@ -94,6 +94,13 @@
         .planet3 { width: 30px; height: 30px; left: 50%; animation-duration: 12s; }
         .planet4 { width: 40px; height: 40px; left: 70%; animation-duration: 18s; }
         .planet5 { width: 45px; height: 45px; left: 90%; animation-duration: 20s; }
+
+        /* Estilo para el mensaje decorativo */
+        .mensaje-decorativo {
+            font-size: 1.2rem;
+            color: #4bffa5;
+            margin-top: 20px;
+        }
     </style>
 </head>
 <body>
@@ -123,16 +130,10 @@
                 <p><strong>Fecha:</strong> 30 de abril</p>
                 <p><strong>Lugar:</strong> Colegio Mi Dulce Amanecer</p>
 
-                <!-- Formulario para ingresar el nombre -->
-                <form id="invitacionForm">
-                    <div class="form-group">
-                        <label for="nombre">Nombre:</label>
-                        <input type="text" class="form-control" id="nombre" placeholder="Ingresa tu nombre" required>
-                    </div>
-                    <button type="submit" class="btn btn-primary">Aceptar Invitación</button>
-                </form>
-
-                <p>¡No faltes! Habrá juegos, sorpresas y mucha diversión.</p>
+                <!-- Mensaje decorativo en lugar del formulario -->
+                <div class="mensaje-decorativo">
+                    ¡No faltes! Habrá juegos, sorpresas y mucha diversión.
+                </div>
             </div>
         </div>
     </div>
@@ -147,35 +148,15 @@
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"></script>
 
-    <!-- Script para enviar datos a Google Sheets -->
+    <!-- Script para reproducir audio después de la interacción del usuario -->
     <script>
-// URL de la aplicación web de Google Apps Script
-const scriptURL = 'https://script.google.com/macros/s/AKfycbwaPCksDzE7t8m2EP2_UQ7oCbN6myfjSyEOPFebn_KA/dev'; // Reemplaza con la URL de tu aplicación web
-
-// Enviar datos a Google Sheets cuando se envíe el formulario
-document.getElementById('invitacionForm').addEventListener('submit', function (event) {
-  event.preventDefault(); // Evita que el formulario se envíe de forma tradicional
-
-  const nombre = document.getElementById('nombre').value;
-
-  // Enviar datos a Google Sheets
-  fetch(scriptURL, {
-    method: 'POST',
-    body: JSON.stringify({ nombre: nombre }), // Enviar datos como JSON
-    headers: {
-      'Content-Type': 'application/json'
-    },
-    mode: 'no-cors' // Evitar problemas de CORS
-  })
-  .then(() => {
-    alert('¡Invitación aceptada! Gracias por confirmar.');
-    document.getElementById('nombre').value = ''; // Borrar el campo de nombre
-  })
-  .catch(error => {
-    console.error('Error:', error);
-    alert('Hubo un error al enviar los datos. Intenta de nuevo.');
-  });
-});
+        // Reproducir audio después de que el usuario interactúe con la página
+        document.addEventListener('click', function () {
+            const audio = document.getElementById('backgroundAudio');
+            audio.play().catch(() => {
+                console.log("La reproducción automática fue bloqueada por el navegador.");
+            });
+        });
     </script>
 </body>
 </html>
