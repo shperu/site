@@ -14,9 +14,13 @@
             color: white;
             font-family: 'Press Start 2P', cursive;
             text-align: center;
+            overflow: hidden;
+            position: relative;
         }
         .container {
             margin-top: 50px;
+            position: relative;
+            z-index: 1;
         }
         .among-us-theme {
             background-color: #2d2d44;
@@ -64,16 +68,44 @@
             font-family: 'Press Start 2P', cursive;
             margin: 10px 0;
         }
+
+        /* Animación de planetas cayendo */
+        @keyframes fall {
+            0% { transform: translateY(-100%); }
+            100% { transform: translateY(100vh); }
+        }
+
+        .planet {
+            position: absolute;
+            width: 50px;
+            height: 50px;
+            background: url('planeta.png') no-repeat center center/cover;
+            animation: fall linear infinite;
+        }
+
+        /* Tamaños y duraciones aleatorias para los planetas */
+        .planet1 { width: 40px; height: 40px; left: 10%; animation-duration: 10s; }
+        .planet2 { width: 60px; height: 60px; left: 30%; animation-duration: 15s; }
+        .planet3 { width: 50px; height: 50px; left: 50%; animation-duration: 12s; }
+        .planet4 { width: 70px; height: 70px; left: 70%; animation-duration: 18s; }
+        .planet5 { width: 80px; height: 80px; left: 90%; animation-duration: 20s; }
     </style>
 </head>
 <body>
+    <!-- Planetas en el fondo -->
+    <div class="planet planet1"></div>
+    <div class="planet planet2"></div>
+    <div class="planet planet3"></div>
+    <div class="planet planet4"></div>
+    <div class="planet planet5"></div>
+
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-8 among-us-theme">
                 <h1>¡Invitación de Cumpleaños!</h1>
                 <h2>Mateo Vicente</h2>
                 <p>¡Estás invitado a celebrar mi cumpleaños número:</p>
-                <div class="cumpleanos-numero">5</div>
+                <div class="cumpleanos-numero">6</div> <!-- Cambiado de 5 a 6 -->
 
                 <!-- Imágenes de astronautas y foto del niño -->
                 <div class="d-flex justify-content-center align-items-center">
